@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_login_ui/screens/login_screen.dart';
-import 'package:project1/screens/login_screen.dart';
+//import 'package:mitrabookingservice/screens/login_screen.dart';
+import 'screens/login_screen.dart';
+//import 'package:fl';
 
 void main() => runApp(MyApp());
 
