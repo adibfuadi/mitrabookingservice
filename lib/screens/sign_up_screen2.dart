@@ -29,15 +29,13 @@ class _Sign_up_dateState extends State<Sign_up_date> {
 //        ),
         SizedBox(height: 10.0),
         Container(
+
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
-              elevation: 4.0,
-              onPressed: () {
+            GestureDetector(
+              onTap: (){
                 DatePicker.showDatePicker(context,
                     theme: DatePickerTheme(
                       containerHeight: 210.0,
@@ -46,11 +44,56 @@ class _Sign_up_dateState extends State<Sign_up_date> {
                     minTime: DateTime(2000, 1, 1),
                     maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
                       print('confirm $date');
-                      _date = '${date.year} - ${date.month} - ${date.day}';
+                      _date = '${date.year} / ${date.month} / ${date.day}';
                       setState(() {});
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
               },
+              child: Container(
+                //shape: RoundedRectangleBorder(
+                // borderRadius: BorderRadius.circular(5.0)),
+                // elevation: 4.0,
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  decoration: kBoxDecorationStyle,
+                  height: 60.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.date_range,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  " $_date",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+//                      Text(
+//                        "Change",
+//                        style: TextStyle(
+//                            color: Colors.white,
+//                            fontWeight: FontWeight.bold,
+//                            fontSize: 18.0),
+//                      ),
+                    ],
+                  ),
+                ),
+              ),
             )
+
           ],
         ),
         ),
@@ -99,7 +142,7 @@ class _Sign_up_dateState extends State<Sign_up_date> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "What's Your Name?",
+                        "Your Birth Day?",
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',

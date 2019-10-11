@@ -46,6 +46,10 @@ flutter:
     - gambar/
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
+    - assets/motor.JPG
+    - assets/motor2.jpg
+    - assets/background.jpg
+    - assets/booking.png
 
 
   fonts:
