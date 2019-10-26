@@ -6,6 +6,7 @@ import 'package:project1/utilities/constants.dart';
 import 'package:project1/screens/login_screen.dart';
 import 'sign_up_screen2.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:http/http.dart' as http;
 
 class Sign_up1 extends StatefulWidget {
   @override
@@ -23,6 +24,46 @@ class _Sign_up1State extends State<Sign_up1> {
 
   String _date = "Not set";
   String _time = "Not set";
+
+  String nUsername, nPassword, nFullname, nAddress, nNotelp, nSex, nJob, nBirthdate;
+
+  // menambahkan key form
+
+  final _keyForm = GlobalKey<FormState>();
+
+  checkForm() {
+    final form = _keyForm.currentState;
+    if (form.validate()) {
+      form.save();
+      submitDataRegister();
+    }
+  }
+
+  submitDataRegister() async{
+    final responseData = await http.post("https://api.hondamitrajaya.com/public/api/mst_users",
+        body: {"username" : nUsername, "password" : nPassword, "fullname" : nFullname, "address": nAddress, "notelp": nNotelp, "sex": nSex,"job": nJob,"birthdate": nBirthdate});
+
+    final data = jsonDecode(responseData.body);
+
+    int value = data[
+    'value'
+    ];
+
+    String pesan = data['message'];
+
+    // cek value 1 atau 0
+
+    if (value == 1){
+      setState(() {
+        Navigator.pop(context);
+      });
+    }else if (value == 2){
+      print(pesan);
+    }else{
+      print(pesan);
+    }
+
+  }
 
   @override
   void initState() {
@@ -326,8 +367,11 @@ class _Sign_up1State extends State<Sign_up1> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Sign_up_date()));
+          setState(() {
+            checkForm();
+          });
+//          Navigator.push(
+//              context, MaterialPageRoute(builder: (context) => Sign_up_date()));
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -351,8 +395,10 @@ class _Sign_up1State extends State<Sign_up1> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: () {
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        //ganti cek form
       },
       child: RichText(
         text: TextSpan(
